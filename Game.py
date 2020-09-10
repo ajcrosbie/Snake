@@ -71,10 +71,13 @@ def main():
     flag = True
     clock = pygame.time.Clock()
     while flag:
+        t = False
+        g = False
         pygame.time.delay(60)
         clock.tick(10)
         s.move()
         f.move()
+
         if s.body[0].pos == snack.pos:
             s.addCube()
             snack = Objects.cube(randomSnack(rows, s, f), colour=(0, 255, 0))
