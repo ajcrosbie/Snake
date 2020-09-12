@@ -3,6 +3,7 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 import pygame
+import time
 
 
 class cube(object):
@@ -39,69 +40,66 @@ class cube(object):
 
 class snake(object):
 
-    def __init__(self, colour, pos, player1=1):
+    def __init__(self, colour, pos, player=1):
         self.colour = colour
         self.body = []
         self.head = cube(pos, self.colour)
         self.body.append(self.head)
         self.dirnx = 0
         self.dirny = 1
-        self.player = player1
+        self.player = player
         self.turns = {}
 
-    def move(self):
-        v = False
-        t = 0
-        while not v:
-            t = t + 1
-            if t == 100:
-                v = True
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                keys = pygame.key.get_pressed()
-                for key in keys:
-                    if keys[pygame.K_LEFT] and self.player == 1:
-                        self.dirnx = -1
-                        self.dirny = 0
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_RIGHT] and self.player == 1:
-                        self.dirnx = 1
-                        self.dirny = 0
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_DOWN] and self.player == 1:
-                        self.dirnx = 0
-                        self.dirny = 1
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_UP] and self.player == 1:
-                        self.dirnx = 0
-                        self.dirny = -1
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_a] and self.player == 0:
-                        print(self.player)
-                        self.dirnx = -1
-                        self.dirny = 0
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_d] and self.player == 0:
-                        self.dirnx = 1
-                        self.dirny = 0
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_s] and self.player == 0:
-                        self.dirnx = 0
-                        self.dirny = 1
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    elif keys[pygame.K_w] and self.player == 0:
-                        self.dirnx = 0
-                        self.dirny = -1
-                        v = True
-                        self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+    def move(self, keys):
+        # v = False
+        # t = 0
+        # while not v:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            # keys = pygame.key.get_pressed()
+        for key in keys:
+            if keys[pygame.K_a] and self.player == 0:
+                # print('y')
+                self.dirnx = -1
+                self.dirny = 0
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_d] and self.player == 0:
+                self.dirnx = 1
+                self.dirny = 0
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_s] and self.player == 0:
+                self.dirnx = 0
+                self.dirny = 1
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_w] and self.player == 0:
+                self.dirnx = 0
+                self.dirny = -1
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_LEFT] and self.player == 1:
+                self.dirnx = -1
+                self.dirny = 0
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_RIGHT] and self.player == 1:
+                self.dirnx = 1
+                self.dirny = 0
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_DOWN] and self.player == 1:
+                self.dirnx = 0
+                self.dirny = 1
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            elif keys[pygame.K_UP] and self.player == 1:
+                self.dirnx = 0
+                self.dirny = -1
+                # v = True
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
         for i, c in enumerate(self.body):
             p = c.pos[:]

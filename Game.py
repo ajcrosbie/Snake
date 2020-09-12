@@ -3,7 +3,12 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 import pygame
+import time
 import Objects
+
+
+def GetKeys():
+    return pygame.key.get_pressed()
 
 
 def drawGrid(w, rows, surface):
@@ -71,12 +76,11 @@ def main():
     flag = True
     clock = pygame.time.Clock()
     while flag:
-        t = False
-        g = False
         pygame.time.delay(60)
         clock.tick(10)
-        s.move()
-        f.move()
+        keys = GetKeys()
+        s.move(keys)
+        f.move(keys)
 
         if s.body[0].pos == snack.pos:
             s.addCube()
@@ -87,11 +91,19 @@ def main():
 
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
-                print('score: ', len(s.body))
+                print('Red score: ', len(s.body))
+                print('Yellow score: ', len(f.body))
                 message_box('you lost', 'play again')
                 s.reset((10, 10))
                 f.reset((15, 15))
                 break
+            for i in range(len(f.body)):
+                if s.body[x].pos in list(map(lambda z: z.pos, f.body[i+1:])):
+                    print('Red score : ', len(s.body))
+                    print('Yellow score: ', len(f.body))
+                    message_box('you lost', 'play again')
+                    s.reset((10, 10))
+                    f.reset((15, 15))
         for x in range(len(f.body)):
             if f.body[x].pos in list(map(lambda z: z.pos, f.body[x+1:])):
                 print('score: ', len(f.body))
