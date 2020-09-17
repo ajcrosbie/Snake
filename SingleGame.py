@@ -73,6 +73,9 @@ def main():
         pygame.time.delay(60)
         clock.tick(10)
         keys = GetKeys()
+        if keys[pygame.K_SPACE]:
+            input('unpause with enter')
+        keys = GetKeys()
         s.move(keys)
 
         if s.body[0].pos == snack.pos:
