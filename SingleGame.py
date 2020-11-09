@@ -18,7 +18,6 @@ def drawGrid(w, rows, surface):
     for i in range(rows):
         x = x + SBT
         y = y + SBT
-
         pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, w))
         pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
 

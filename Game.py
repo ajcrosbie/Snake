@@ -41,13 +41,10 @@ def randomSnack(rows, item, item2):
     while True:
         x = random.randrange(rows)
         y = random.randrange(rows)
-
         if len(list(filter(lambda z: z.pos == (x, y), positions))) > 0:
             continue
-
         elif len(list(filter(lambda z: z.pos == (x, y), positions2))) > 0:
             continue
-
         else:
             break
 
